@@ -1,0 +1,33 @@
+{
+  "root": true,
+  "project": {
+    "name": "ingridblix"
+  },
+  "api": {
+    "projectId": "r641vock",
+    "dataset": "ingridblix_dataset"
+  },
+  "plugins": [
+    "@sanity/base",
+    "@sanity/components",
+    "@sanity/default-layout",
+    "@sanity/default-login",
+    "@sanity/desk-tool",
+    "@sanity/dashboard"
+  ],
+  "env": {
+    "development": {
+      "plugins": ["@sanity/vision"]
+    }
+  },
+  "parts": [
+    {
+      "name": "part:@sanity/base/schema",
+      "path": "./schemas/schema"
+    },
+    {
+      "name": "part:@sanity/desk-tool/structure",
+      "path": "./src/deskStructure.js"
+    }
+  ]
+}
