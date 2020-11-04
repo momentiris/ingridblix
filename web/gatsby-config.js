@@ -1,6 +1,6 @@
 module.exports = {
   siteMetadata: {
-    title: `ingridblix`,
+    title: `ingrid blix`,
     description: `Personal portfolio site for artist Ingrid Blix`,
     author: `@momentiris <https://github.com/momentiris>`,
   },
@@ -32,13 +32,8 @@ module.exports = {
       options: {
         projectId: 'r641vock',
         dataset: 'ingridblix_dataset',
-        // a token with read permissions is required
-        // if you have a private dataset
-        // token: process.env.MY_SANITY_TOKEN,
       },
     },
-    // this (optional) plugin enables Progressive Web App + Offline functionality
-    // To learn more, visit: https://gatsby.dev/offline
-    // `gatsby-plugin-offline`,
+    `gatsby-plugin-postcss`,
   ],
 }
