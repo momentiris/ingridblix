@@ -16,8 +16,8 @@ const Component = ({ post }) => {
       <h1 className="text-2xl font-semibold italic">{post.name}</h1>
       {post.shortDescription && <p>{post.shortDescription}</p>}
       {images.map((fluidProps, index) => (
-        <div className="mb-8 max-w-2xl">
-          <Img key={index} fluid={fluidProps} />
+        <div className="mb-8 max-w-2xl" key={index}>
+          <Img fluid={fluidProps} />
         </div>
       ))}
     </article>

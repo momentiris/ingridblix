@@ -11,10 +11,14 @@ const Header = ({ siteTitle = '' }) => (
       </li>
 
       <li>
-        <Link to="/work">work</Link>
+        <Link className="text-3xl" to="/work">
+          work
+        </Link>
       </li>
       <li>
-        <p>cv</p>
+        <Link className="text-3xl" to="/">
+          CV
+        </Link>
       </li>
     </ul>
   </header>

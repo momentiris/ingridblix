@@ -3,7 +3,6 @@ import { graphql } from 'gatsby'
 import Work from '../components/single-work'
 import SEO from '../components/seo'
 import Layout from '../components/layout'
-import { getFluidGatsbyImage } from 'gatsby-source-sanity'
 
 export const query = graphql`
   query workTemplateQuery($id: String!) {
