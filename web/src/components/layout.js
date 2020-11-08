@@ -15,11 +15,11 @@ const Layout = ({ children }) => {
   `)
 
   return (
-    <div className="h-full w-full layout">
+    <div className="h-full w-full layout tracking-wider ">
       <div className="max-w-xs h-full relative">
         <Header siteTitle={data.site.siteMetadata?.title || `Title`} />
       </div>
-      <main className="p-8">{children}</main>
+      <main className="px-12 mt-24">{children}</main>
     </div>
   )
 }

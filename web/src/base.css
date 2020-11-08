@@ -1,5 +1,6 @@
 body {
-  cursor: cell;
+  font-family: 'Times New Roman', 'serif';
+  line-height: normal;
 }
 
 .layout {

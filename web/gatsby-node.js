@@ -26,7 +26,7 @@ async function createBlogPostPages(graphql, actions) {
 
     createPage({
       path,
-      component: require.resolve('./src/templates/work-post.js'),
+      component: require.resolve('./src/templates/work.js'),
       context: { id },
     })
   })

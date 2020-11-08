@@ -10,8 +10,17 @@ export const query = graphql`
       name
       shortDescription
       materials
+      year
       images {
         asset {
+          metadata {
+            lqip
+            dimensions {
+              aspectRatio
+              height
+              width
+            }
+          }
           _id
         }
       }

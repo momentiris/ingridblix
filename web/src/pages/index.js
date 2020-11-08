@@ -1,31 +1,10 @@
 import React from 'react'
+import { getFluidGatsbyImage } from 'gatsby-source-sanity'
+import Img from 'gatsby-image'
 import Layout from '../components/layout'
-import Image from '../components/image'
 import SEO from '../components/seo'
 
 export const query = graphql`
-  fragment SanityImage on SanityMainImage {
-    crop {
-      _key
-      _type
-      top
-      bottom
-      left
-      right
-    }
-    hotspot {
-      _key
-      _type
-      x
-      y
-      height
-      width
-    }
-    asset {
-      _id
-    }
-  }
-
   query IndexPageQuery {
     site: sanitySiteSettings(_id: { regex: "/(drafts.|)siteSettings/" }) {
       title
@@ -36,10 +15,17 @@ export const query = graphql`
       edges {
         node {
           id
+          title
           images {
-            _key
-            _type
             asset {
+              metadata {
+                lqip
+                dimensions {
+                  aspectRatio
+                  height
+                  width
+                }
+              }
               _id
             }
           }
@@ -51,6 +37,17 @@ export const query = graphql`
 
 const IndexPage = ({ data }) => {
   const site = data?.site
+  const posts = data?.posts?.edges?.map(({ node }) => {
+    const images = node.images.map((image) =>
+      getFluidGatsbyImage(
+        image.asset,
+        { maxWidth: 700 },
+        { projectId: 'r641vock', dataset: 'ingridblix_dataset' }
+      )
+    )
+
+    return { ...node, images }
+  })
 
   return (
     <Layout>
@@ -59,6 +56,20 @@ const IndexPage = ({ data }) => {
         description={site.description}
         keywords={site.keywords}
       />
+
+      {posts.map((post, index) => {
+        return (
+          <div key={index}>
+            {post.title && <h3 className="text-lg italic">{post.title}</h3>}
+
+            {post.images.map((props, index) => (
+              <div className="mb-8 max-w-2xl" key={index}>
+                <Img fluid={props} />
+              </div>
+            ))}
+          </div>
+        )
+      })}
     </Layout>
   )
 }
