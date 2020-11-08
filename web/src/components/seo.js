@@ -19,6 +19,7 @@ function SEO({ description = '', lang = 'en', meta = [], title }) {
 
   const metaDescription = description || site.siteMetadata.description
   const defaultTitle = site.siteMetadata?.title
+  console.log(title)
 
   return (
     <Helmet
