@@ -41,7 +41,7 @@ const IndexPage = ({ data }) => {
     const images = node.images.map((image) =>
       getFluidGatsbyImage(
         image.asset,
-        { maxWidth: 700 },
+        { maxHeight: 900, maxWidth: 900 },
         { projectId: 'r641vock', dataset: 'ingridblix_dataset' }
       )
     )
@@ -56,20 +56,27 @@ const IndexPage = ({ data }) => {
         description={site.description}
         keywords={site.keywords}
       />
+      <div className="">
+        {posts.map((post, index) => {
+          return (
+            <div key={index} className="mb-12">
+              {post.title && <h3 className="text-lg italic">{post.title}</h3>}
 
-      {posts.map((post, index) => {
-        return (
-          <div key={index}>
-            {post.title && <h3 className="text-lg italic">{post.title}</h3>}
-
-            {post.images.map((props, index) => (
-              <div className="mb-8 max-w-2xl" key={index}>
-                <Img fluid={props} />
+              <div className="flex flex-wrap gap-4">
+                {post.images.map((props, index) => (
+                  <div
+                    className="flex-1"
+                    style={{ minWidth: 500, maxWidth: '80vh' }}
+                    key={index}
+                  >
+                    <Img fluid={props} />
+                  </div>
+                ))}
               </div>
-            ))}
-          </div>
-        )
-      })}
+            </div>
+          )
+        })}
+      </div>
     </Layout>
   )
 }
