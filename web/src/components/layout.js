@@ -15,7 +15,7 @@ const Layout = ({ children }) => {
   `)
 
   return (
-    <div className="h-full w-full layout tracking-wider ">
+    <div className="h-full w-full layout tracking-wider">
       <div className="max-w-xs h-full relative">
         <Header siteTitle={data.site.siteMetadata?.title || `Title`} />
       </div>

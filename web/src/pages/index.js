@@ -65,8 +65,8 @@ const IndexPage = ({ data }) => {
               <div className="flex flex-wrap gap-4">
                 {post.images.map((props, index) => (
                   <div
-                    className="flex-1"
-                    style={{ minWidth: 500, maxWidth: '80vh' }}
+                    className="flex-1 max-w-md"
+                    style={{ minWidth: 200 }}
                     key={index}
                   >
                     <Img fluid={props} />
