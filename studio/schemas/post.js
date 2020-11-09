@@ -14,7 +14,10 @@ export default {
       type: 'array',
       of: [
         {
+          name: 'image',
           type: 'image',
+          options: { metadata: ['lqip'] },
+          fields: [],
         },
       ],
       name: 'images',

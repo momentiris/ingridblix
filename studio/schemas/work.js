@@ -10,6 +10,11 @@ export default {
       description: 'The name of the work.',
     },
     {
+      name: 'year',
+      type: 'string',
+      title: 'Year created',
+    },
+    {
       name: 'slug',
       type: 'slug',
       title: 'Slug',
@@ -27,14 +32,21 @@ export default {
     },
     {
       name: 'materials',
-      type: 'array',
-      of: [{ type: 'string' }],
+      type: 'string',
       title: 'Materials',
     },
     {
       title: 'Images',
       type: 'array',
-      of: [{ type: 'image' }],
+      of: [
+        {
+          name: 'image',
+          type: 'image',
+          options: { metadata: ['lqip'] },
+          fields: [],
+        },
+      ],
+
       name: 'images',
     },
   ],
