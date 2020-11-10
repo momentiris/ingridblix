@@ -5,10 +5,14 @@ module.exports = {
   },
   purge: ['./src/**/*.js'],
   theme: {
-    extend: {},
+    extend: {
+      gridTemplateColumns: {
+        layout: 'minmax(100px, 175px) 1fr',
+      },
+    },
   },
   variants: {
-    fontStyle: ['responsive', 'hover'],
+    fontStyle: ['responsive', 'hover', 'active'],
   },
   plugins: [],
 }

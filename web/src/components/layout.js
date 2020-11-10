@@ -1,6 +1,7 @@
 import React from 'react'
 import { useStaticQuery, graphql } from 'gatsby'
 import Header from './header'
+
 import '../base.css'
 
 const Layout = ({ children }) => {
@@ -15,10 +16,9 @@ const Layout = ({ children }) => {
   `)
 
   return (
-    <div className="h-full w-full layout tracking-wider">
-      <div className="max-w-xs h-full relative">
-        <Header siteTitle={data.site.siteMetadata?.title || `Title`} />
-      </div>
+    <div className="h-full w-full sm:grid sm:grid-cols-layout tracking-wider px-">
+      <Header siteTitle={data.site.siteMetadata?.title || `Title`} />
+
       <main className="px-12 mt-24">{children}</main>
     </div>
   )
