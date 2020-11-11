@@ -12,7 +12,7 @@ module.exports = {
     },
   },
   variants: {
-    fontStyle: ['responsive', 'hover', 'active'],
+    fontStyle: ['responsive', 'hover', 'active', 'focus'],
   },
   plugins: [],
 }

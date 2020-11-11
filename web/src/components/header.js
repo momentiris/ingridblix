@@ -6,7 +6,7 @@ const Header = ({ siteTitle = '' }) => {
   const [open, setOpen] = React.useState(false)
 
   return (
-    <header>
+    <header onTouchStart="">
       <nav className="sm:hidden top-0 pl-8 pt-8 fixed z-50">
         <Link className="z-40 text-xl inline-block" to="/">
           {siteTitle}
@@ -14,7 +14,7 @@ const Header = ({ siteTitle = '' }) => {
         <div className="fixed bottom-0 right-0 p-4  z-20">
           <button
             onClick={() => setOpen((current) => !current)}
-            className={`w-20 p-4 text-black`}
+            className={`w-16 p-4 text-black`}
           >
             <Hamburger />
           </button>
@@ -35,7 +35,7 @@ const Header = ({ siteTitle = '' }) => {
           </li>
           <li>
             <Link to="/">
-              <p className="text-4xl active:italic hover:italic inline-block">
+              <p className="text-4xl hover:italic active:italic inline-block">
                 cv
               </p>
             </Link>
