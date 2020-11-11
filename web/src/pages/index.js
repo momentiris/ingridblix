@@ -16,7 +16,7 @@ export const query = graphql`
         node {
           id
           title
-          images {
+          image {
             asset {
               metadata {
                 lqip
@@ -38,15 +38,13 @@ export const query = graphql`
 const IndexPage = ({ data }) => {
   const site = data?.site
   const posts = data?.posts?.edges?.map(({ node }) => {
-    const images = node.images.map((image) =>
-      getFluidGatsbyImage(
-        image.asset,
-        { maxHeight: 900, maxWidth: 900 },
-        { projectId: 'r641vock', dataset: 'ingridblix_dataset' }
-      )
+    const image = getFluidGatsbyImage(
+      node.image.asset,
+      { maxWidth: 500 },
+      { projectId: 'r641vock', dataset: 'ingridblix_dataset' }
     )
 
-    return { ...node, images }
+    return { ...node, image }
   })
 
   return (
@@ -56,23 +54,14 @@ const IndexPage = ({ data }) => {
         description={site.description}
         keywords={site.keywords}
       />
-      <div className="">
+      <div className="flex flex-wrap gap-4 w-full">
         {posts.map((post, index) => {
           return (
-            <div key={index} className="mb-12">
-              {post.title && <h3 className="text-lg italic">{post.title}</h3>}
-
-              <div className="flex flex-wrap gap-4">
-                {post.images.map((props, index) => (
-                  <div
-                    className="flex-1 max-w-md"
-                    style={{ minWidth: 200 }}
-                    key={index}
-                  >
-                    <Img fluid={props} />
-                  </div>
-                ))}
-              </div>
+            <div
+              key={index}
+              className="mb-12 flex-1 flex-shrink-0  min-w-small lg:min-w-big max-w-lg"
+            >
+              <Img fluid={post.image} />
             </div>
           )
         })}

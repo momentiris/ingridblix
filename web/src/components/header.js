@@ -6,7 +6,7 @@ const Header = ({ siteTitle = '' }) => {
   const [open, setOpen] = React.useState(false)
 
   return (
-    <header onTouchStart="">
+    <header onTouchStart={() => {}}>
       <nav className="sm:hidden top-0 pl-8 pt-8 fixed z-50">
         <Link className="z-40 text-xl inline-block" to="/">
           {siteTitle}

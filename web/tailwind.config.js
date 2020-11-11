@@ -9,6 +9,10 @@ module.exports = {
       gridTemplateColumns: {
         layout: 'minmax(100px, 175px) 1fr',
       },
+      minWidth: {
+        small: '175px',
+        big: '350px',
+      },
     },
   },
   variants: {

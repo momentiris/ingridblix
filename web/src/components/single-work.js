@@ -3,7 +3,7 @@ import Img from 'gatsby-image'
 import { getFluidGatsbyImage } from 'gatsby-source-sanity'
 
 const Component = ({ post }) => {
-  const images = post.images.map((image) =>
+  const images = post.image.map((image) =>
     getFluidGatsbyImage(
       image.asset,
       { maxWidth: 700 },
