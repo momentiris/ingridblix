@@ -10,7 +10,7 @@ module.exports = {
         layout: 'minmax(100px, 175px) 1fr',
       },
       minWidth: {
-        small: '175px',
+        small: '125px',
         big: '350px',
       },
     },
