@@ -10,17 +10,14 @@ export default {
       description: 'Titles should be catchy, descriptive, and not too long',
     },
     {
-      title: 'Images',
-      type: 'array',
-      of: [
-        {
-          name: 'image',
-          type: 'image',
-          options: { metadata: ['lqip'] },
-          fields: [],
+      name: 'image',
+      type: 'myImage',
+      preview: {
+        select: {
+          imageUrl: 'asset.url',
+          title: 'caption',
         },
-      ],
-      name: 'images',
+      },
     },
   ],
   orderings: [
@@ -39,9 +36,9 @@ export default {
     select: {
       title: 'title',
       slug: 'slug',
-      media: 'mainImage',
+      media: 'image',
     },
-    prepare({ title = 'No name', slug = {}, media }) {
+    prepare({ title = 'No name', slug = { current: 'ok' }, media }) {
       return {
         title,
         media,

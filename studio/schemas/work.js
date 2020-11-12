@@ -35,18 +35,16 @@ export default {
       type: 'string',
       title: 'Materials',
     },
+
     {
       title: 'Images',
       type: 'array',
       of: [
         {
-          name: 'image',
-          type: 'image',
+          type: 'myImage',
           options: { metadata: ['lqip'] },
-          fields: [],
         },
       ],
-
       name: 'images',
     },
   ],
@@ -70,7 +68,9 @@ export default {
     },
     prepare({ title = 'No name', slug = {}, media }) {
       const path = `/work/${slug.current}`
+
       return {
+        path: 'asdf',
         title,
         media,
         subtitle: path,

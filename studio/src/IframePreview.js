@@ -17,8 +17,8 @@ const assemblePostUrl = ({ displayed, options }) => {
     console.warn('Missing previewURL', { previewURL })
     return ''
   }
+  const path = _type === 'post' ? '' : `${_type}/${slug.current}/`
 
-  const path = _type === 'work' ? '' : `/${_type}/${slug.current}/`
   return `${previewURL}/${path}`
 }
 
