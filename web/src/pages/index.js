@@ -54,17 +54,29 @@ const IndexPage = ({ data }) => {
         description={site.description}
         keywords={site.keywords}
       />
-      <div className="flex flex-wrap gap-4 w-full">
-        {posts.map((post, index) => {
-          return (
-            <div
-              key={index}
-              className="mb-12 flex-1 flex-shrink-0  min-w-small lg:min-w-big max-w-lg"
-            >
-              <Img fluid={post.image} />
-            </div>
-          )
-        })}
+      <div className="flex w-full justify-center max-w-screen-lg ">
+        <div className=" flex-1">
+          {posts
+            .filter((_, index) => index % 2 !== 0)
+            .map((post, index) => {
+              return (
+                <div key={index} className="min-w-small lg:min-w-big ">
+                  <Img fluid={post.image} />
+                </div>
+              )
+            })}
+        </div>
+        <div className="flex-1">
+          {posts
+            .filter((_, index) => index % 2 === 0)
+            .map((post, index) => {
+              return (
+                <div key={index} className="min-w-small lg:min-w-big ">
+                  <Img fluid={post.image} />
+                </div>
+              )
+            })}
+        </div>
       </div>
     </Layout>
   )
