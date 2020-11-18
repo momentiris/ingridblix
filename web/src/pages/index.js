@@ -3,6 +3,8 @@ import { getFluidGatsbyImage } from 'gatsby-source-sanity'
 import Img from 'gatsby-image'
 import Layout from '../components/layout'
 import SEO from '../components/seo'
+import { sanityClient } from '../client'
+import imageUrlBuilder from '@sanity/image-url'
 
 export const query = graphql`
   query IndexPageQuery {
@@ -17,6 +19,12 @@ export const query = graphql`
           id
           title
           image {
+            crop {
+              bottom
+              left
+              right
+              top
+            }
             asset {
               metadata {
                 lqip
@@ -37,15 +45,33 @@ export const query = graphql`
 
 const IndexPage = ({ data }) => {
   const site = data?.site
+  const builder = imageUrlBuilder(sanityClient)
+
   const posts = data?.posts?.edges?.map(({ node }) => {
+    if (node.image.crop) {
+      return {
+        ...node,
+        image: (
+          <img
+            alt={node.name || 'blog post '}
+            src={urlFor(node.image).maxWidth(500).url()}
+          />
+        ),
+      }
+    }
     const image = getFluidGatsbyImage(
       node.image.asset,
       { maxWidth: 500 },
-      { projectId: 'r641vock', dataset: 'ingridblix_dataset' }
+      sanityClient
     )
+    console.log(image)
 
-    return { ...node, image }
+    return { ...node, image: <Img fluid={image} /> }
   })
+
+  function urlFor(source) {
+    return builder.image(source)
+  }
 
   return (
     <Layout>
@@ -61,7 +87,7 @@ const IndexPage = ({ data }) => {
             .map((post, index) => {
               return (
                 <div key={index} className="min-w-small lg:min-w-big ">
-                  <Img fluid={post.image} />
+                  {post.image}
                 </div>
               )
             })}
@@ -72,7 +98,7 @@ const IndexPage = ({ data }) => {
             .map((post, index) => {
               return (
                 <div key={index} className="min-w-small lg:min-w-big ">
-                  <Img fluid={post.image} />
+                  {post.image}
                 </div>
               )
             })}

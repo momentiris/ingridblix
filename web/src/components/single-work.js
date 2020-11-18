@@ -1,14 +1,11 @@
 import React from 'react'
 import Img from 'gatsby-image'
+import { sanityClient } from '../client'
 import { getFluidGatsbyImage } from 'gatsby-source-sanity'
 
 const Component = ({ post }) => {
   const images = post.images.map((image) =>
-    getFluidGatsbyImage(
-      image.asset,
-      { maxWidth: 700 },
-      { projectId: 'r641vock', dataset: 'ingridblix_dataset' }
-    )
+    getFluidGatsbyImage(image.asset, { maxWidth: 700 }, sanityClient)
   )
 
   return (
