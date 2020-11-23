@@ -27,7 +27,7 @@ export default {
       by: [
         {
           field: '_createdAt',
-          direction: 'asc',
+          direction: 'desc',
         },
       ],
     },

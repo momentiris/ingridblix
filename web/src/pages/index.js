@@ -13,7 +13,7 @@ export const query = graphql`
       description
       keywords
     }
-    posts: allSanityPost {
+    posts: allSanityPost(sort: { fields: _createdAt, order: DESC }) {
       edges {
         node {
           id
@@ -64,7 +64,6 @@ const IndexPage = ({ data }) => {
       { maxWidth: 500 },
       sanityClient
     )
-    console.log(image)
 
     return { ...node, image: <Img fluid={image} /> }
   })
@@ -83,7 +82,7 @@ const IndexPage = ({ data }) => {
       <div className="flex w-full justify-center max-w-screen-lg ">
         <div className=" flex-1">
           {posts
-            .filter((_, index) => index % 2 !== 0)
+            .filter((_, index) => index % 2 === 0)
             .map((post, index) => {
               return (
                 <div key={index} className="min-w-small lg:min-w-big ">
@@ -94,7 +93,7 @@ const IndexPage = ({ data }) => {
         </div>
         <div className="flex-1">
           {posts
-            .filter((_, index) => index % 2 === 0)
+            .filter((_, index) => index % 2 !== 0)
             .map((post, index) => {
               return (
                 <div key={index} className="min-w-small lg:min-w-big ">
