@@ -42,22 +42,22 @@ const Header = ({ siteTitle = '' }) => {
           </li>
         </ul>
       </div>
-      <nav className="hidden sm:block fixed top-0 pl-8 pt-8">
-        <ul className="relative">
+      <nav className="hidden sm:block fixed top-0 pl-8 pt-8 z-10">
+        <ul className="relative flex gap-8">
           <li className="mb-12">
-            <Link className="text-xl inline-block" to="/">
+            <Link className="text-xl hover:bg-white inline-block" to="/">
               {siteTitle}
             </Link>
           </li>
 
-          <li>
+          <li className="ml-16">
             <Link to="/work">
-              <p className="text-xl hover:italic inline-block">work</p>
+              <p className="text-xl hover:bg-white inline-block">work</p>
             </Link>
           </li>
           <li>
             <Link to="/">
-              <p className="text-xl hover:italic inline-block">cv</p>
+              <p className="text-xl hover:bg-white inline-block">cv</p>
             </Link>
           </li>
         </ul>

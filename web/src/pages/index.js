@@ -79,29 +79,17 @@ const IndexPage = ({ data }) => {
         description={site.description}
         keywords={site.keywords}
       />
-      <div className="flex w-full justify-center max-w-screen-lg ">
-        <div className=" flex-1">
-          {posts
-            .filter((_, index) => index % 2 === 0)
-            .map((post, index) => {
-              return (
-                <div key={index} className="min-w-small lg:min-w-big ">
-                  {post.image}
-                </div>
-              )
-            })}
-        </div>
-        <div className="flex-1">
-          {posts
-            .filter((_, index) => index % 2 !== 0)
-            .map((post, index) => {
-              return (
-                <div key={index} className="min-w-small lg:min-w-big ">
-                  {post.image}
-                </div>
-              )
-            })}
-        </div>
+      <div
+        className="w-full max-w-screen-lg"
+        style={{ columnCount: 3, columnGap: 0 }}
+      >
+        {posts.concat(posts).map((post, index) => {
+          return (
+            <div key={index} className=" " style={{ breakInside: 'avoid' }}>
+              {post.image}
+            </div>
+          )
+        })}
       </div>
     </Layout>
   )
