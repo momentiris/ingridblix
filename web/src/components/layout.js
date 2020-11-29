@@ -16,10 +16,10 @@ const Layout = ({ children }) => {
   `)
 
   return (
-    <div className="relative flex justify-center">
+    <div className="relative max-w-screen-lg mx-auto">
       <Header siteTitle={data.site.siteMetadata?.title || `Title`} />
 
-      <main className="px-8 mt-48">{children}</main>
+      <main className="px-8 mt-40">{children}</main>
     </div>
   )
 }

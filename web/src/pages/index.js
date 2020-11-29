@@ -46,6 +46,7 @@ export const query = graphql`
 const IndexPage = ({ data }) => {
   const site = data?.site
   const builder = imageUrlBuilder(sanityClient)
+  const urlFor = (source) => builder.image(source)
 
   const posts = data?.posts?.edges?.map(({ node }) => {
     if (node.image.crop) {
@@ -59,6 +60,7 @@ const IndexPage = ({ data }) => {
         ),
       }
     }
+
     const image = getFluidGatsbyImage(
       node.image.asset,
       { maxWidth: 500 },
@@ -67,10 +69,6 @@ const IndexPage = ({ data }) => {
 
     return { ...node, image: <Img fluid={image} /> }
   })
-
-  function urlFor(source) {
-    return builder.image(source)
-  }
 
   return (
     <Layout>
@@ -83,9 +81,9 @@ const IndexPage = ({ data }) => {
         className="w-full max-w-screen-lg"
         style={{ columnCount: 3, columnGap: 0 }}
       >
-        {posts.concat(posts).map((post, index) => {
+        {posts.map((post, index) => {
           return (
-            <div key={index} className=" " style={{ breakInside: 'avoid' }}>
+            <div key={index} style={{ breakInside: 'avoid' }}>
               {post.image}
             </div>
           )

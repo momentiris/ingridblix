@@ -6,9 +6,12 @@ const Header = ({ siteTitle = '' }) => {
   const [open, setOpen] = React.useState(false)
 
   return (
-    <header onTouchStart={() => {}}>
-      <nav className="sm:hidden top-0 pl-8 pt-8 fixed z-50">
-        <Link className="z-40 text-xl inline-block" to="/">
+    <header
+      onTouchStart={() => {}}
+      className="fixed max-w-screen-lg mx-auto w-full top-0 z-50"
+    >
+      <nav className="sm:hidden top-0 pl-8 pt-8 ">
+        <Link className="relative z-40 text-xl inline-block" to="/">
           {siteTitle}
         </Link>
         <div className="fixed bottom-0 right-0 p-4  z-20">
@@ -42,7 +45,7 @@ const Header = ({ siteTitle = '' }) => {
           </li>
         </ul>
       </div>
-      <nav className="hidden sm:block fixed top-0 pl-8 pt-8 z-10">
+      <nav className="hidden sm:block top-0 pl-8 pt-8 z-10">
         <ul className="relative flex gap-8">
           <li className="mb-12">
             <Link className="text-xl hover:bg-white inline-block" to="/">
