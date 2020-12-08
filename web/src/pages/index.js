@@ -5,6 +5,7 @@ import Layout from '../components/layout'
 import SEO from '../components/seo'
 import { sanityClient } from '../client'
 import imageUrlBuilder from '@sanity/image-url'
+import { Masonry } from 'masonic'
 
 export const query = graphql`
   query IndexPageQuery {
@@ -77,20 +78,15 @@ const IndexPage = ({ data }) => {
         description={site.description}
         keywords={site.keywords}
       />
-      <div
-        className="w-full max-w-screen-lg"
-        style={{ columnCount: 3, columnGap: 0 }}
-      >
-        {posts.map((post, index) => {
-          return (
-            <div key={index} style={{ breakInside: 'avoid' }}>
-              {post.image}
-            </div>
-          )
-        })}
+      <div className="min-h-screen w-full">
+        <Masonry items={posts} render={C} columnWidth={1024 / 4} />
       </div>
     </Layout>
   )
+}
+
+const C = ({ data, width }) => {
+  return <div style={{ width: '100%', maxWidth: width }}>{data.image}</div>
 }
 
 export default IndexPage
