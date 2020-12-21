@@ -5,7 +5,6 @@ import Layout from '../components/layout'
 import SEO from '../components/seo'
 import { sanityClient } from '../client'
 import imageUrlBuilder from '@sanity/image-url'
-import { Masonry } from 'masonic'
 
 export const query = graphql`
   query IndexPageQuery {
@@ -71,6 +70,11 @@ const IndexPage = ({ data }) => {
     return { ...node, image: <Img fluid={image} /> }
   })
 
+  const list = []
+    .concat([posts.filter((_, i) => i % 3 === 0)])
+    .concat([posts.filter((_, i) => i % 3 === 1)])
+    .concat([posts.filter((_, i) => i % 3 === 2)])
+
   return (
     <Layout>
       <SEO
@@ -78,8 +82,14 @@ const IndexPage = ({ data }) => {
         description={site.description}
         keywords={site.keywords}
       />
-      <div className="min-h-screen w-full">
-        <Masonry items={posts} render={C} columnWidth={1024 / 4} />
+      <div className="grid grid-flow-col">
+        {list.map((posts) => (
+          <div className="flex flex-col ">
+            {posts.map((post, i) => (
+              <div key={i}>{post.image}</div>
+            ))}
+          </div>
+        ))}
       </div>
     </Layout>
   )
