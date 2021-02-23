@@ -37,11 +37,7 @@ const Component = ({ post }) => {
 
   return (
     <article>
-      {post.name && (
-        <h1 className="text-xl font-medium italic">
-          {post.name} ({post.year})
-        </h1>
-      )}
+      {post.name && <h1 className="text-xl font-medium italic">{post.name}</h1>}
       {post.materials && <p className="text-sm mt-1">{post.materials}</p>}
       {post._rawBody && (
         <div className="my-6">

@@ -30,9 +30,9 @@ const Header = ({ siteTitle = '' }) => {
       >
         <ul>
           <li>
-            <Link to="/work">
+            <Link to="/works">
               <p className="text-4xl active:italic hover:italic inline-block">
-                work
+                works
               </p>
             </Link>
           </li>
@@ -54,8 +54,8 @@ const Header = ({ siteTitle = '' }) => {
           </li>
 
           <li className="ml-16">
-            <Link to="/work">
-              <p className=" w-24 text-xl hover:italic inline-block">work</p>
+            <Link to="/works">
+              <p className=" w-24 text-xl hover:italic inline-block">works</p>
             </Link>
           </li>
           <li>
