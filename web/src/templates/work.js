@@ -11,7 +11,14 @@ export const query = graphql`
       shortDescription
       materials
       year
+      _rawBody(resolveReferences: { maxDepth: 10 })
       images {
+        crop {
+          bottom
+          left
+          right
+          top
+        }
         asset {
           metadata {
             lqip

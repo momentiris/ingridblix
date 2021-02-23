@@ -48,27 +48,28 @@ const IndexPage = ({ data }) => {
   const builder = imageUrlBuilder(sanityClient)
   const urlFor = (source) => builder.image(source)
 
-  const posts = data?.posts?.edges?.map(({ node }) => {
-    if (node.image.crop) {
-      return {
-        ...node,
-        image: (
-          <img
-            alt={node.name || 'blog post '}
-            src={urlFor(node.image).maxWidth(500).url()}
-          />
-        ),
+  const posts =
+    data?.posts?.edges?.map(({ node }) => {
+      if (node.image.crop) {
+        return {
+          ...node,
+          image: (
+            <img
+              alt={node.name || 'blog post '}
+              src={urlFor(node.image).maxWidth(500).url()}
+            />
+          ),
+        }
       }
-    }
 
-    const image = getFluidGatsbyImage(
-      node.image.asset,
-      { maxWidth: 500 },
-      sanityClient
-    )
+      const image = getFluidGatsbyImage(
+        node.image.asset,
+        { maxWidth: 500 },
+        sanityClient
+      )
 
-    return { ...node, image: <Img fluid={image} /> }
-  })
+      return { ...node, image: <Img fluid={image} /> }
+    }) ?? []
 
   const list = []
     .concat([posts.filter((_, i) => i % 3 === 0)])
@@ -93,10 +94,6 @@ const IndexPage = ({ data }) => {
       </div>
     </Layout>
   )
-}
-
-const C = ({ data, width }) => {
-  return <div style={{ width: '100%', maxWidth: width }}>{data.image}</div>
 }
 
 export default IndexPage

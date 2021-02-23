@@ -22,15 +22,15 @@ const query = graphql`
 
 const Component = () => {
   const data = useStaticQuery(query).allSanityWork.edges.map(({ node }) => node)
+
   return (
     <Layout>
       <SEO title="Work" />
-      <ul className="h-full flex items-center">
+      <ul className="h-full">
         {data.map((item) => (
-          <li className="underline text-lg" key={item.slug.current}>
-            <Link to={`/work/${item.slug.current}`}>
-              {item.name} ({item.year})
-            </Link>
+          <li className="mb-4 text-lg" key={item.slug.current}>
+            <Link to={`/work/${item.slug.current}`}>{item.name}</Link>
+            <p className="text-xs ">{item.year}</p>
           </li>
         ))}
       </ul>

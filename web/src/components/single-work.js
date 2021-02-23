@@ -2,31 +2,53 @@ import React from 'react'
 import Img from 'gatsby-image'
 import { sanityClient } from '../client'
 import { getFluidGatsbyImage } from 'gatsby-source-sanity'
+import BlockContent from './blockContent'
+import imageUrlBuilder from '@sanity/image-url'
 
 const Component = ({ post }) => {
-  const images = post.images.map((image) =>
-    getFluidGatsbyImage(image.asset, { maxWidth: 700 }, sanityClient)
-  )
+  const builder = imageUrlBuilder(sanityClient)
+  const urlFor = (source) => builder.image(source)
+
+  const images =
+    post.images.map((image, index) => {
+      if (image.crop) {
+        return (
+          <img
+            className="mb-8 max-w-4xl"
+            key={index}
+            alt={image.alt || 'blog post '}
+            src={urlFor(image).maxWidth(1200).url()}
+          />
+        )
+      }
+
+      const fluidImg = getFluidGatsbyImage(
+        image.asset,
+        { maxWidth: 700 },
+        sanityClient
+      )
+
+      return (
+        <div className="mb-8 max-w-4xl">
+          <Img key={index} fluid={fluidImg} />
+        </div>
+      )
+    }) ?? []
 
   return (
     <article>
       {post.name && (
-        <h1 className="text-2xl font-semibold italic">
+        <h1 className="text-xl font-medium italic">
           {post.name} ({post.year})
         </h1>
       )}
-      {post.materials && <p className="text-sm mb-4">{post.materials}</p>}
-      {post.shortDescription && (
-        <h3 className="text-lg">{post.shortDescription}</h3>
+      {post.materials && <p className="text-sm mt-1">{post.materials}</p>}
+      {post._rawBody && (
+        <div className="my-6">
+          <BlockContent blocks={post._rawBody} />
+        </div>
       )}
-
-      <div className="mt-2">
-        {images.map((props, index) => (
-          <div className="mb-8 max-w-2xl" key={index}>
-            <Img fluid={props} />
-          </div>
-        ))}
-      </div>
+      <div className="mt-2">{images}</div>
     </article>
   )
 }

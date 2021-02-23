@@ -31,6 +31,10 @@ export default {
       title: 'Short Description',
     },
     {
+      name: 'body',
+      type: 'bodyPortableText',
+    },
+    {
       name: 'materials',
       type: 'string',
       title: 'Materials',
@@ -42,7 +46,7 @@ export default {
       of: [
         {
           type: 'myImage',
-          options: { metadata: ['lqip'] },
+          options: { metadata: ['lqip'], hotspot: true },
         },
       ],
       name: 'images',

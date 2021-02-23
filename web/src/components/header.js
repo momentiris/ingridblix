@@ -14,7 +14,7 @@ const Header = ({ siteTitle = '' }) => {
         <Link className="relative z-40 text-xl inline-block" to="/">
           {siteTitle}
         </Link>
-        <div className="fixed bottom-0 right-0 p-4  z-20">
+        <div className="fixed bottom-0 right-0 p-4 z-20">
           <button
             onClick={() => setOpen((current) => !current)}
             className={`w-16 p-4 text-black`}
