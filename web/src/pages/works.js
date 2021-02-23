@@ -29,7 +29,9 @@ const Component = () => {
       <ul className="h-full">
         {data.map((item) => (
           <li className="mb-4 text-lg" key={item.slug.current}>
-            <Link to={`/works/${item.slug.current}`}>{item.name}</Link>
+            <Link to={`/works/${item.slug.current}`} className="hover:italic">
+              {item.name}
+            </Link>
             <p className="text-xs ">{item.year}</p>
           </li>
         ))}
