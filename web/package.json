@@ -1,7 +1,7 @@
 {
   "name": "ingridblix",
   "private": true,
-  "description": "Personal portfolio site for artist Ingrid Blix",
+  "description": "Ingrid Blix",
   "version": "0.1.0",
   "author": "Andreas Lundqvist <momentiris@gmail.com>",
   "dependencies": {
@@ -24,6 +24,9 @@
     "tailwindcss": "^1.9.6"
   },
   "devDependencies": {
+    "eslint": "^7.27.0",
+    "eslint-config-react-app": "^6.0.0",
+    "eslint-plugin-react": "^7.23.2",
     "prettier": "2.1.2"
   },
   "keywords": [

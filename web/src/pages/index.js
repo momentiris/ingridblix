@@ -1,41 +1,18 @@
 import React from 'react'
-import { getFluidGatsbyImage } from 'gatsby-source-sanity'
-import Img from 'gatsby-image'
+import { Link } from 'gatsby'
 import Layout from '../components/layout'
 import SEO from '../components/seo'
-import { sanityClient } from '../client'
-import imageUrlBuilder from '@sanity/image-url'
+import { useStaticQuery, graphql } from 'gatsby'
 
-export const query = graphql`
-  query IndexPageQuery {
-    site: sanitySiteSettings(_id: { regex: "/(drafts.|)siteSettings/" }) {
-      title
-      description
-      keywords
-    }
-    posts: allSanityPost(sort: { fields: _createdAt, order: DESC }) {
+const query = graphql`
+  query work {
+    allSanityWork {
       edges {
         node {
-          id
-          title
-          image {
-            crop {
-              bottom
-              left
-              right
-              top
-            }
-            asset {
-              metadata {
-                lqip
-                dimensions {
-                  aspectRatio
-                  height
-                  width
-                }
-              }
-              _id
-            }
+          name
+          year
+          slug {
+            current
           }
         }
       }
@@ -43,57 +20,24 @@ export const query = graphql`
   }
 `
 
-const IndexPage = ({ data }) => {
-  const site = data?.site
-  const builder = imageUrlBuilder(sanityClient)
-  const urlFor = (source) => builder.image(source)
-
-  const posts =
-    data?.posts?.edges?.map(({ node }) => {
-      if (node.image.crop) {
-        return {
-          ...node,
-          image: (
-            <img
-              alt={node.name || 'blog post '}
-              src={urlFor(node.image).maxWidth(500).url()}
-            />
-          ),
-        }
-      }
-
-      const image = getFluidGatsbyImage(
-        node.image.asset,
-        { maxWidth: 500 },
-        sanityClient
-      )
-
-      return { ...node, image: <Img fluid={image} /> }
-    }) ?? []
-
-  const list = []
-    .concat([posts.filter((_, i) => i % 3 === 0)])
-    .concat([posts.filter((_, i) => i % 3 === 1)])
-    .concat([posts.filter((_, i) => i % 3 === 2)])
+const Component = () => {
+  const data = useStaticQuery(query).allSanityWork.edges.map(({ node }) => node)
 
   return (
     <Layout>
-      <SEO
-        title={site.title}
-        description={site.description}
-        keywords={site.keywords}
-      />
-      <div className="grid grid-flow-col">
-        {list.map((posts) => (
-          <div className="flex flex-col ">
-            {posts.map((post, i) => (
-              <div key={i}>{post.image}</div>
-            ))}
-          </div>
+      <SEO title="Work" />
+      <ul className="h-full">
+        {data.map((item) => (
+          <li className="mb-2 text-lg" key={item.slug.current}>
+            <Link to={`/work/${item.slug.current}`} className="hover:italic">
+              {item.name}
+            </Link>
+            <p className="text-xs ">{item.year}</p>
+          </li>
         ))}
-      </div>
+      </ul>
     </Layout>
   )
 }
 
-export default IndexPage
+export default Component

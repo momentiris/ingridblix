@@ -1,7 +1,7 @@
 module.exports = {
   siteMetadata: {
     title: `Ingrid Blix`,
-    description: `Personal portfolio site for artist Ingrid Blix`,
+    description: `Ingrid Blix`,
     author: `@momentiris <https://github.com/momentiris>`,
   },
   plugins: [

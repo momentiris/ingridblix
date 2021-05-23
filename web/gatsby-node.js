@@ -22,7 +22,7 @@ async function createBlogPostPages(graphql, actions) {
   postEdges.forEach((edge) => {
     const { id, slug = {} } = edge.node
 
-    const path = `/works/${slug.current}/`
+    const path = `/work/${slug.current}/`
 
     createPage({
       path,

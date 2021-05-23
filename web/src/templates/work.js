@@ -20,6 +20,7 @@ export const query = graphql`
           top
         }
         asset {
+          url
           metadata {
             lqip
             dimensions {
