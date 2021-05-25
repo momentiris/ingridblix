@@ -3,7 +3,7 @@ import { Link } from 'gatsby'
 
 const Header = ({ siteTitle = 'Ingrid Blix' }) => (
   <header>
-    <nav className="w-full px-8 mt-8 flex justify-between items-center">
+    <nav className="w-full px-8 mt-12 flex justify-between items-center">
       <Link to="/" className="text-2xl hover:italic">
         {siteTitle}
       </Link>
