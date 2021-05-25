@@ -25,7 +25,7 @@ const Component = () => {
 
   return (
     <Layout>
-      <SEO title="Work" />
+      <SEO title="Home" />
       <ul className="h-full">
         {data.map((item) => (
           <li className="mb-2 text-lg" key={item.slug.current}>
