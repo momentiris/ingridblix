@@ -1,67 +1,35 @@
 import React from 'react'
-import { Helmet } from 'react-helmet'
-import { useStaticQuery, graphql } from 'gatsby'
+import { useSiteMetadata } from '../hooks/useSiteMetadata'
 
-function SEO({ description = '', lang = 'en', meta = [], title }) {
-  const { site } = useStaticQuery(
-    graphql`
-      query {
-        site {
-          siteMetadata {
-            title
-            description
-            author
-          }
-        }
-      }
-    `
-  )
+export function SEO({
+  title = '',
+  lang = 'en',
+  meta = [],
+  description = '',
+  children,
+}) {
+  const {
+    title: defaultTitle,
+    description: defaultDescription,
+    author: defaultAuthor,
+  } = useSiteMetadata()
 
-  const metaDescription = description || site.siteMetadata.description
-  const defaultTitle = site.siteMetadata?.title
+  const seo = {
+    title: title || defaultTitle,
+    description: description || defaultDescription,
+    author: defaultAuthor || '',
+  }
 
   return (
-    <Helmet
-      htmlAttributes={{
-        lang,
-      }}
-      title={title || defaultTitle}
-      titleTemplate={defaultTitle ? `%s | ${defaultTitle}` : null}
-      meta={[
-        {
-          name: `description`,
-          content: metaDescription,
-        },
-        {
-          property: `og:title`,
-          content: title,
-        },
-        {
-          property: `og:description`,
-          content: metaDescription,
-        },
-        {
-          property: `og:type`,
-          content: `website`,
-        },
-        {
-          name: `twitter:card`,
-          content: `summary`,
-        },
-        {
-          name: `twitter:creator`,
-          content: site.siteMetadata?.author || ``,
-        },
-        {
-          name: `twitter:title`,
-          content: title,
-        },
-        {
-          name: `twitter:description`,
-          content: metaDescription,
-        },
-      ].concat(meta)}
-    />
+    <>
+      <title>{seo.title}</title>
+      <meta name="description" content={seo.description} />
+      <meta name="og:title" content={seo.title} />
+      <meta name="og:type" content="website" />
+      <meta name="og:description" content={seo.description} />
+      <meta name="og:author" content={seo.author} />
+      {children}
+    </>
   )
 }
 

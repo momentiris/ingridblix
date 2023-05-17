@@ -1,8 +1,8 @@
 import React from 'react'
 import { Link } from 'gatsby'
 import Layout from '../components/layout'
-import SEO from '../components/seo'
 import { useStaticQuery, graphql } from 'gatsby'
+import { SEO } from '../components/seo'
 
 const query = graphql`
   query work {
@@ -25,7 +25,6 @@ const Component = () => {
 
   return (
     <Layout>
-      <SEO title="Home" />
       <ul className="h-full">
         {data.map((item) => (
           <li className="mb-2 text-lg" key={item.slug.current}>
@@ -39,5 +38,7 @@ const Component = () => {
     </Layout>
   )
 }
+
+export const Head = () => <SEO title="Home" />
 
 export default Component

@@ -1,12 +1,11 @@
 import React from 'react'
 import { getFluidImage, urlFor } from '../utils'
-import Img from 'gatsby-image'
 import Layout from '../components/layout'
-import SEO from '../components/seo'
 import { graphql } from 'gatsby'
+import { GatsbyImage } from 'gatsby-plugin-image'
+import { SEO } from '../components/seo'
 
 const IndexPage = ({ data }) => {
-  const site = data?.site
   const posts = data?.posts?.edges.map(({ node }) => node)
 
   const columns = []
@@ -16,11 +15,6 @@ const IndexPage = ({ data }) => {
 
   return (
     <Layout>
-      <SEO
-        title={site.title}
-        description={site.description}
-        keywords={site.keywords}
-      />
       <div className="grid grid-flow-col gap-4">
         {columns.map((posts, i) => (
           <div key={i} className="flex flex-col gap-4">
@@ -52,7 +46,7 @@ const getImage = (image) => {
   }
 
   const fluidImg = getFluidImage(image.asset, { maxWidth: 500 })
-  return <Img fluid={fluidImg} />
+  return <GatsbyImage fluid={fluidImg} />
 }
 
 export const query = graphql`
@@ -62,7 +56,7 @@ export const query = graphql`
       description
       keywords
     }
-    posts: allSanityPost(sort: { fields: _createdAt, order: DESC }) {
+    posts: allSanityPost(sort: { _createdAt: DESC }) {
       edges {
         node {
           id
@@ -92,5 +86,7 @@ export const query = graphql`
     }
   }
 `
+
+export const Head = () => <SEO title="Blog" />
 
 export default IndexPage

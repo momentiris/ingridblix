@@ -1,13 +1,11 @@
-import S from '@sanity/desk-tool/structure-builder'
-import { MdSettings, MdDescription } from 'react-icons/md'
+import {MdSettings, MdDescription} from 'react-icons/md'
 
 import IframePreview from './IframePreview'
 
 // Web preview configuration
 const remoteURL = '<#<deployments.web.url>#>'
 const localURL = 'http://localhost:8000'
-const previewURL =
-  window.location.hostname === 'localhost' ? localURL : remoteURL
+const previewURL = window.location.hostname === 'localhost' ? localURL : remoteURL
 
 export const getDefaultDocumentNode = (props) => {
   /**
@@ -18,14 +16,11 @@ export const getDefaultDocumentNode = (props) => {
    * https://www.sanity.io/docs/structure-builder-reference#getdefaultdocumentnode-97e44ce262c9
    */
   const previewSchemaTypes = ['post', 'work']
-  const { schemaType } = props
+  const {schemaType} = props
   if (previewSchemaTypes.includes(schemaType)) {
     return S.document().views([
       S.view.form(),
-      S.view
-        .component(IframePreview)
-        .title('Web preview')
-        .options({ previewURL }),
+      S.view.component(IframePreview).title('Web preview').options({previewURL}),
     ])
   }
   return S.document().views([S.view.form()])
@@ -40,19 +35,14 @@ export const getDefaultDocumentNode = (props) => {
  * - https://www.sanity.io/docs/structure-builder-reference
  */
 
-export default () =>
+export default (S) =>
   S.list()
     .title('Content')
     .items([
       S.listItem()
         .title('Settings')
         .icon(MdSettings)
-        .child(
-          S.editor()
-            .id('siteSettings')
-            .schemaType('siteSettings')
-            .documentId('siteSettings')
-        ),
+        .child(S.editor().id('siteSettings').schemaType('siteSettings').documentId('siteSettings')),
       S.divider(),
       S.listItem()
         .title('Works')
@@ -70,8 +60,6 @@ export default () =>
       // defined the structure above.
       ...S.documentTypeListItems().filter(
         (listItem) =>
-          !['category', 'author', 'post', 'siteSettings', 'work'].includes(
-            listItem.getId()
-          )
+          !['category', 'author', 'post', 'siteSettings', 'work'].includes(listItem.getId())
       ),
     ])

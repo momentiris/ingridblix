@@ -1,11 +1,10 @@
 import React from 'react'
-import { graphql } from 'gatsby'
+import { graphql, useStaticQuery } from 'gatsby'
 import Work from '../components/single-work'
-import SEO from '../components/seo'
 import Layout from '../components/layout'
 
-export const query = graphql`
-  query workTemplateQuery($id: String!) {
+const query = graphql`
+  query workTemplateQuery($id: String) {
     sanityWork(id: { eq: $id }) {
       name
       shortDescription
@@ -36,8 +35,8 @@ export const query = graphql`
   }
 `
 
-const Component = (props) => {
-  const { data, errors } = props
+const Component = () => {
+  const { data, errors } = useStaticQuery(query)
   const post = data?.sanityWork ?? {}
 
   if (errors) {
@@ -47,7 +46,6 @@ const Component = (props) => {
 
   return (
     <Layout>
-      <SEO title={post.name} description={post.shortDescription} />
       <Work post={post} />
     </Layout>
   )
