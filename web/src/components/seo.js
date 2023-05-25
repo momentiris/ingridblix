@@ -9,15 +9,15 @@ export function SEO({
   children,
 }) {
   const {
-    title: defaultTitle,
+    title: defaultTitle = 'Ingrid Blix',
     description: defaultDescription,
-    author: defaultAuthor,
+    author = 'https://github.com/momentiris',
   } = useSiteMetadata()
 
   const seo = {
     title: title || defaultTitle,
     description: description || defaultDescription,
-    author: defaultAuthor || '',
+    author,
   }
 
   return (

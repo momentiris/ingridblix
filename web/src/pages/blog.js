@@ -51,11 +51,6 @@ const getImage = (image) => {
 
 export const query = graphql`
   query IndexPageQuery {
-    site: sanitySiteSettings(_id: { regex: "/(drafts.|)siteSettings/" }) {
-      title
-      description
-      keywords
-    }
     posts: allSanityPost(sort: { _createdAt: DESC }) {
       edges {
         node {
